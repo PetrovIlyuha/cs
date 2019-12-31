@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- add mocha css, to show results -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+  <!-- add mocha framework code -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+  <script>
+    mocha.setup('bdd'); // minimal setup
+  </script>
+  <!-- add chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+  <script>
+    // chai has a lot of stuff, let's make assert global
+    let assert = chai.assert;
+  </script>
+</head>
+
+<body>
+
+  <script>
+
+    function quickSort(nums) {
+       if (nums.length <= 1) return nums;
+  
+      const pivot = nums[nums.length - 1];
+      let left = [];
+      let right = [];
+  
+      for (let i = 0; i < nums.length - 1; i++) {
+        if (nums[i] < pivot) {
+           left.push(nums[i]);
+        } else {
+          right.push(nums[i]);
+         }
+        }
+      return [...quickSort(left), pivot, ...quickSort(right)];
+    }
+
+    function pow(x, n) {
+      let result = 1;
+
+      for (let i = 0; i < n; i++) {
+        result *= x;
+      }
+
+      return result;
+    }
+    let sortThis = [4,3,2,6,5,7,1];
+    let sortedResult = quickSort(sortThis);
+    console.log(sortedResult);
+  
+  </script>
+
+  <!-- the element with id="mocha" will contain test results -->
+  <div id="mocha"></div>
+
+  <!-- run tests! -->
+  <script>
+    describe("quick Sorting algorithm", function() {
+      it("Quick Sort", function() {
+        let arr = [1,4,2,3,6,5]
+        assert.equal(quickSort(arr),[1,2,3,4,5,6]);
+      });
+    });
+
+    describe("pow", function() {
+
+      // before(() => alert("Testing started – before all tests"));
+      // after(() => alert("Testing finished – after all tests"));
+
+      // beforeEach(() => alert("Before a test – enter a test"));
+      // afterEach(() => alert("After a test – exit a test"));
+      function makeTest(x) {
+        let expected = x * x * x;
+        it(`${x} in the power 3 is ${expected}`, function() {
+          assert.equal(pow(x, 3), expected);
+        });
+      }
+
+      for (let x = 1; x <= 5; x++) {
+        makeTest(x);
+      }
+
+    });
+
+    describe("Raises x to power n", function() {
+  it("5 in the power of 1 equals 5", function() {
+    assert.equal(pow(5, 1), 5);
+  });
+
+  it("5 in the power of 2 equals 25", function() {
+    assert.equal(pow(5, 2), 25);
+  });
+
+  it("5 in the power of 3 equals 125", function() {
+    assert.equal(pow(5, 3), 125);
+  });
+});
+
+    mocha.run();
+  </script>
+</body>
+
+</html>

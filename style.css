@@ -1,0 +1,11 @@
+.output {
+  margin: 40px;
+  padding: 30px;
+  border: 3px solid #AC44AF;
+  background-color: #BADa55;
+  color: slategrey;
+  font-size: 2rem;
+  align-content: center;
+  align-self: auto;
+  float: left;
+}
